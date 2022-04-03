@@ -18,10 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 Route::get('/auth/redirect', [DiscordController::class, 'redirect'])->name('discord.redirect');
 Route::get('/auth/callback', [DiscordController::class, 'callback'])->name('discord.callback');
 
