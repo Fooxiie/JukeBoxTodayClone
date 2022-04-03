@@ -13,9 +13,3 @@ Retour vers la page du project [JukeBoxClone](https://www.notion.so/JukeBoxClone
 - PHP
 - Laravel 9
 - HTML/CSS/JS
-
----
-
-# Fonctionnalités
-
-[Fonctionnalités](Spe%CC%81cifica%200b0e2/Fonctionna%20c1be9.csv)
