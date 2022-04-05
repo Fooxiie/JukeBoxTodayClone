@@ -20,7 +20,7 @@ class DiscordController extends Controller
         } catch (InvalidStateException) {
             return redirect(route('discord.redirect'));
         }
-        $isUser = User::query()->where('source', $user->id)->first();
+        $isUser = User::query()->where('discord_id', $user->id)->first();
         if ($isUser) {
             Auth::loginUsingId($isUser->id);
             return redirect(route('welcome'));
