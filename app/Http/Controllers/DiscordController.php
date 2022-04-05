@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\InvalidStateException;
 
 class DiscordController extends Controller
 {
@@ -14,7 +15,11 @@ class DiscordController extends Controller
     }
 
     public function callback(Request $req) {
-        $user = Socialite::driver('discord')->user();
+        try {
+            $user = Socialite::driver('discord')->user();
+        } catch (InvalidStateException) {
+            return redirect(route('discord.redirect'));
+        }
         $isUser = User::query()->where('source', $user->id)->first();
         if ($isUser) {
             Auth::loginUsingId($isUser->id);
@@ -24,7 +29,7 @@ class DiscordController extends Controller
             $newUser->name = $user->getName();
             $newUser->email = $user->getEmail();
             $newUser->password = "nonono";
-            $newUser->source = $user->getId();
+            $newUser->discord_id = $user->getId();
             $newUser->save();
             Auth::login($newUser);
             return redirect(route('welcome'));

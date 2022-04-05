@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')
+                ->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('name')->unique();
             $table->timestamps();
         });

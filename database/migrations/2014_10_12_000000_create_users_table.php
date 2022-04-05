@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('source')->default('interne');
+            $table->string('discord_id')->nullable();
+            $table->string('spotify_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-class Room
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Room extends Model
 {
-    protected $casts = [
-        'created_at' => 'datetime',
-    ];
+    use HasFactory;
 }
