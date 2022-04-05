@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\DiscordController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SpotifyController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    if (Auth::user() != null) {
+        return redirect(\route('room'));
+    }
     return view('welcome');
 })->name('welcome');
 
@@ -26,5 +31,7 @@ Route::get('/auth/spotify/redirect', [SpotifyController::class, 'redirect'])
     ->middleware(['auth'])->name('spotify.redirect');
 Route::get('/auth/spotify/callback', [SpotifyController::class, 'callback'])
     ->middleware(['auth'])->name('spotify.callback');
+
+Route::get('/room', [RoomController::class, 'show'])->middleware(['auth'])->name('room');
 
 require __DIR__.'/auth.php';
