@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (Auth::user() != null) {
-        return redirect(\route('room'));
+        return redirect(\route('roomhub'));
     }
     return view('welcome');
 })->name('welcome');
@@ -32,6 +32,8 @@ Route::get('/auth/spotify/redirect', [SpotifyController::class, 'redirect'])
 Route::get('/auth/spotify/callback', [SpotifyController::class, 'callback'])
     ->middleware(['auth'])->name('spotify.callback');
 
-Route::get('/room', [RoomController::class, 'show'])->middleware(['auth'])->name('room');
+Route::get('/roomhub', [RoomController::class, 'show'])->middleware(['auth'])->name('roomhub');
+Route::get('/room', [RoomController::class, 'listen'])->middleware(['auth'])->name('room');
+Route::get('/room/delete', [RoomController::class, 'delete'])->middleware(['auth'])->name('room.delete');
 
 require __DIR__.'/auth.php';

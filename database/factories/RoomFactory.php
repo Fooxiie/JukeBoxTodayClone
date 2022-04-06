@@ -19,7 +19,7 @@ class RoomFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->city(),
+            'name' => Room::getSharedCode(10),
             'user_id' => User::factory()
         ];
     }

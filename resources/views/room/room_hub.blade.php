@@ -9,17 +9,29 @@
                 <div class="border-t border-gray-700">
                     <dl>
                         @php($onOff = true)
-                        @foreach(\App\Models\Room::all() as $elmt)
+                        @foreach($rooms as $elmt)
                             @if ($onOff)
-                                <div class="bg-gray-500 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <div class="bg-gray-500 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 flex">
                                     {{$elmt->name}}
-                                    <x-btn>S'y rendre ! 🙃</x-btn>
+                                    <x-btn :href="route('room', ['name' => $elmt->name])">S'y rendre ! 🙃</x-btn>
+                                    <x-btn :href="route('room.delete', ['id' => $elmt->id])" class="inline-flex text-center
+                                        px-4 py-2 bg-red-700 border border-transparent rounded-md
+                                        font-semibold text-xs text-gray-200 font-bold uppercase tracking-widest
+                                        hover:bg-red-400 active:bg-gray-900 focus:outline-none
+                                        focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25
+                                        transition ease-in-out duration-150 hover:text-black text-center">Supprimer ❌</x-btn>
                                 </div>
                                 @php($onOff = false)
                             @else
-                                <div class="bg-gray-600 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <div class="bg-gray-600 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 flex">
                                     {{$elmt->name}}
-                                    <x-btn>S'y rendre ! 🙃</x-btn>
+                                    <x-btn :href="route('room', ['name' => $elmt->name])">S'y rendre ! 🙃</x-btn>
+                                    <x-btn :href="route('room.delete', ['id' => $elmt->id])" class="inline-flex text-center
+                                        px-4 py-2 bg-red-700 border border-transparent rounded-md
+                                        font-semibold text-xs text-gray-200 font-bold uppercase tracking-widest
+                                        hover:bg-red-400 active:bg-gray-900 focus:outline-none
+                                        focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25
+                                        transition ease-in-out duration-150 hover:text-black text-center">Supprimer ❌</x-btn>
                                 </div>
                                 @php($onOff = true)
                             @endif
